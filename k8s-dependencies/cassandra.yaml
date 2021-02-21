@@ -1,0 +1,138 @@
+affinity: {}
+args: []
+cluster:
+  clientEncryption: false
+  datacenter: dc1
+  enableRPC: true
+  endpointSnitch: SimpleSnitch
+  internodeEncryption: none
+  name: cassandra
+  numTokens: 256
+  rack: rack1
+  seedCount: 1
+clusterDomain: cluster.local
+command: []
+common:
+  exampleValue: common-chart
+  global: {}
+commonAnnotations: {}
+commonLabels: {}
+containerPorts:
+  cql: 9042
+  intra: 7000
+  jmx: 7199
+  thrift: 9160
+  tls: 7001
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+customLivenessProbe: {}
+customReadinessProbe: {}
+dbUser:
+  forcePassword: false
+  password: supersecretpassword
+  user: cassandra
+extraDeploy: []
+extraEnvVars: []
+extraEnvVarsCM: null
+extraEnvVarsSecret: null
+extraVolumeMounts: []
+extraVolumes: []
+hostAliases: []
+hostNetwork: false
+image:
+  debug: false
+  pullPolicy: IfNotPresent
+  registry: docker.io
+  repository: bitnami/cassandra
+  tag: 3.11.10-debian-10-r6
+initContainers: []
+jvm:
+  extraOpts: null
+livenessProbe:
+  enabled: true
+  failureThreshold: 5
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  successThreshold: 1
+  timeoutSeconds: 5
+metrics:
+  containerPorts:
+    http: 8080
+    jmx: 5555
+  enabled: false
+  image:
+    pullPolicy: IfNotPresent
+    registry: docker.io
+    repository: bitnami/cassandra-exporter
+    tag: 2.3.4-debian-10-r315
+  podAnnotations:
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
+  resources:
+    limits: {}
+    requests: {}
+  serviceMonitor:
+    enabled: false
+networkPolicy:
+  enabled: false
+nodeAffinityPreset:
+  key: ""
+  type: ""
+  values: []
+nodeSelector: {}
+pdb:
+  create: false
+  minAvailable: 1
+persistence:
+  accessModes:
+  - ReadWriteOnce
+  annotations: null
+  enabled: true
+  mountPath: /bitnami/cassandra
+  size: 8Gi
+podAffinityPreset: ""
+podAnnotations: {}
+podAntiAffinityPreset: soft
+podLabels: {}
+podManagementPolicy: OrderedReady
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+readinessProbe:
+  enabled: true
+  failureThreshold: 5
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+replicaCount: 1
+resources:
+  limits: {}
+  requests: {}
+service:
+  annotations: {}
+  metricsPort: 8080
+  nodePorts:
+    cql: ""
+    metrics: ""
+    thrift: ""
+  port: 9042
+  thriftPort: 9160
+  type: ClusterIP
+sidecars: []
+tolerations: []
+topologySpreadConstraints: []
+updateStrategy: RollingUpdate
+volumePermissions:
+  enabled: false
+  image:
+    pullPolicy: Always
+    registry: docker.io
+    repository: bitnami/minideb
+    tag: buster
+  resources:
+    limits: {}
+    requests: {}
+  securityContext:
+    runAsUser: 0
