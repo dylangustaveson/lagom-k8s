@@ -4,6 +4,10 @@ version in ThisBuild := "1.0-SNAPSHOT"
 // the Scala version that will be used for cross-compiled libraries
 scalaVersion in ThisBuild := "2.13.0"
 
+lagomKafkaEnabled in ThisBuild := false
+lagomCassandraEnabled in ThisBuild := false
+lagomServiceLocatorEnabled in ThisBuild := true
+
 val macwire = "com.softwaremill.macwire" %% "macros" % "2.3.3" % "provided"
 val scalaTest = "org.scalatest" %% "scalatest" % "3.1.1" % Test
 
@@ -23,6 +27,8 @@ lazy val `hello-impl` = (project in file("hello-impl"))
     libraryDependencies ++= Seq(
       lagomScaladslPersistenceCassandra,
       lagomScaladslKafkaBroker,
+      lagomScaladslAkkaDiscovery,
+      "com.lightbend.akka.discovery" %% "akka-discovery-kubernetes-api" % "1.0.1",
       lagomScaladslTestKit,
       macwire,
       scalaTest
@@ -48,6 +54,3 @@ lazy val `hello-stream-impl` = (project in file("hello-stream-impl"))
     )
   )
   .dependsOn(`hello-stream-api`, `hello-api`)
-
-lagomKafkaEnabled := false
-lagomCassandraEnabled := false

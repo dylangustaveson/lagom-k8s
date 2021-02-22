@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-impl
+  labels:
+    app: hello-impl
+    app.kubernetes.io/name: hello-impl
+  annotations:
+    rollme: {{ randAlphaNum 5 | quote }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:      
+      app: hello-impl
+  template:
+    metadata:
+      labels:
+        app: hello-impl
+        app.kubernetes.io/name: hello-impl
+    spec:
+      containers:
+      - name: hello-impl
+        image: hello-impl:latest
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: AKKA_CLUSTER_BOOTSTRAP_SERVICE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: "metadata.labels['app']"
+          - name: REQUIRED_CONTACT_POINT_NR
+            value: "2"
+        ports:
+        - name: http
+          containerPort: 9000
+        - name: management
+          containerPort: 8558
+        - name: remoting
+          containerPort: 2552

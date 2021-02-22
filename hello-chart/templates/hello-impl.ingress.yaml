@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-impl
+  labels:
+    app: hello-impl
+    app.kubernetes.io/name: hello-impl
+spec:
+  rules:
+  - host: hello.local.afawfaaw.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-impl
+            port:
+              name: http

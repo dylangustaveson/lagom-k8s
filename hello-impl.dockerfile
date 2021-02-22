@@ -17,6 +17,3 @@ COPY ./hello-impl/target/universal/scripts/bin ./scripts/bin
 RUN unzip -q -o ./hello-impl-1.0-SNAPSHOT/hello-impl-1.0-SNAPSHOT.zip
 
 CMD ["bash", "-c", "java -cp \"$APP_CLASSPATH\" $JAVA_OPTS $JMX_CONFIG $CONFIG $PLAY_SERVER_START"]
-
-# hello-impl-1.0-SNAPSHOT  hello-impl-1.0-SNAPSHOT.zip  scripts
-# "sh", "-c", "java -cp "$APP_CLASSPATH" $JAVA_OPTS $JMX_CONFIG $CONFIG $PLAY_SERVER_START"

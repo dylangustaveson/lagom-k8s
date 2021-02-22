@@ -11,13 +11,12 @@ import com.afawfaaw.hello.api.HelloService
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
 import com.lightbend.lagom.scaladsl.playjson.JsonSerializerRegistry
 import com.softwaremill.macwire._
+import com.lightbend.lagom.scaladsl.akka.discovery.AkkaDiscoveryComponents
 
 class HelloLoader extends LagomApplicationLoader {
 
   override def load(context: LagomApplicationContext): LagomApplication =
-    new HelloApplication(context) {
-      override def serviceLocator: ServiceLocator = NoServiceLocator
-    }
+    new HelloApplication(context) with AkkaDiscoveryComponents
 
   override def loadDevMode(context: LagomApplicationContext): LagomApplication =
     new HelloApplication(context) with LagomDevModeComponents
